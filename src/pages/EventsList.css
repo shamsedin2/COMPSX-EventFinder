@@ -1,62 +1,159 @@
+/* ============================================
+   EventsList – mobile-first responsive layout
+   Base styles = mobile (375px and up)
+   ============================================ */
+
 .events-page {
-  padding: 40px;
-  max-width: 1400px;
+  width: 100%;
+  max-width: 87.5rem;          /* 1400px */
   margin: 0 auto;
+  padding: 1.5rem 1rem;        /* tighter padding on phones */
 }
 
 .loading {
   text-align: center;
-  padding: 100px 0;
-  font-size: 24px;
+  padding: 6rem 1rem;
+  font-size: 1.25rem;
   color: #666;
 }
 
 .page-header {
-  margin-bottom: 40px;
+  margin-bottom: 1.5rem;
 }
 
 .page-header h1 {
-  font-size: 42px;
+  font-size: 1.75rem;          /* ~28px on mobile */
+  line-height: 1.2;
   color: #2c3e50;
-  margin-bottom: 10px;
+  margin-bottom: 0.5rem;
 }
 
 .page-header p {
-  font-size: 18px;
+  font-size: 1rem;
   color: #666;
 }
 
+/* Sidebar and grid stack vertically on mobile */
 .events-container {
   display: flex;
-  gap: 40px;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .sidebar {
-  width: 280px;
-  flex-shrink: 0;
+  width: 100%;
 }
 
 .filter-section {
   background-color: white;
-  padding: 25px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
 }
 
 .filter-section h2 {
-  font-size: 24px;
-  margin-bottom: 15px;
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
   color: #2c3e50;
 }
 
 .filter-note {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #999;
 }
 
+/* Single column of cards using flexbox */
 .events-grid {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.events-grid > * {
+  flex: 1 1 100%;
+  min-width: 0;                /* lets long titles wrap instead of overflowing */
+}
+
+/* ============================================
+   Tablet – 768px and up
+   2 cards per row, sidebar stays stacked on top
+   ============================================ */
+@media (min-width: 48rem) {
+  .events-page {
+    padding: 2rem 1.5rem;
+  }
+
+  .page-header {
+    margin-bottom: 2rem;
+  }
+
+  .page-header h1 {
+    font-size: 2.25rem;
+  }
+
+  .page-header p {
+    font-size: 1.125rem;
+  }
+
+  .events-container {
+    gap: 2rem;
+  }
+
+  .events-grid {
+    gap: 1.5rem;
+  }
+
+  /* 2 per row: half the width minus half the gap */
+  .events-grid > * {
+    flex: 0 1 calc(50% - 0.75rem);
+  }
+}
+
+/* ============================================
+   Desktop – 1024px and up
+   Sidebar and grid side by side
+   ============================================ */
+@media (min-width: 64rem) {
+  .events-page {
+    padding: 2.5rem;
+  }
+
+  .page-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .page-header h1 {
+    font-size: 2.625rem;       /* 42px */
+  }
+
+  .events-container {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2.5rem;
+  }
+
+  .sidebar {
+    width: 17.5rem;            /* 280px fixed sidebar */
+    flex-shrink: 0;
+    position: sticky;
+    top: 1.5rem;
+  }
+
+  .filter-section {
+    padding: 1.5rem;
+  }
+
+  .filter-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .events-grid {
+    flex: 1;                   /* grid takes the remaining space */
+    gap: 1.875rem;
+  }
+
+  .events-grid > * {
+    flex: 0 1 calc(50% - 0.9375rem);
+  }
 }
